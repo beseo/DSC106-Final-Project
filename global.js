@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Store the data for later use and calculate hospital stay length
             window.clinicalInfo = parsedData.data.map(item => ({
                 ...item,
-                hosp_stay: (parseFloat(item.dis) - parseFloat(item.adm)) / 86400 // Calculate hospital stay length in days
+                hosp_stay: (parseFloat(item.dis) - parseFloat(item.adm)) / 86400, // Calculate hospital stay length in days
+                bmi_category: getBMICategory(item.bmi), // Calculate BMI category) 
             }));
 
             // Initially display data for the first variable
-            updateChart('sex');
+            updateChart('asa');
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
         }
@@ -38,9 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
         'preop_pft': 'Preoperative Pulmonary Function',
         'preop_htn': 'Preoperative Hypertension',
         'preop_dm': 'Preoperative Diabetes',
+        'bmi_category': 'BMI',
+        'age': 'Age',
+        'asa': 'ASA Classification',
     };
-    
 
+    function getBMICategory(bmi) {
+        if (bmi < 18.5) {
+            return "Underweight";
+        } else if (bmi < 25) {
+            return "Normal";
+        } else if (bmi < 30) {
+            return "Overweight";
+        } else if (bmi < 40) {
+            return "Obese";
+        } else if (bmi >= 40) {
+            return "Severely Obese";
+        }
+    }
+    
     // Function to update the bar chart based on the selected variable
     function updateChart(variable) {
         const data = window.clinicalInfo;
@@ -64,13 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle 0 and 1 as Yes/No, and 'm' and 'f' as Male/Female
             if (variable === 'sex') {
                 return key === 'M' ? 'Male' : (key === 'F' ? 'Female' : key);
-            } else if (key === '1') {
-                return 'Yes';
-            } else if (key === '0') {
-                return 'No';
+            } else if (variable != 'asa') {
+                if (key === '1') {
+                    return 'Yes';
+                } else if (key === '0') {
+                    return 'No';
+                }
+                return key;
+            } else {
+                return key;
             }
-            return key;
-        });
+        }).sort();
 
         const averages = categories.map(category => {
             // Get the average stay for each category
@@ -116,7 +137,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const category = tooltipItem.label;
+                                const averageStay = tooltipItem.raw;
+                                
+                                const key = category === 'Male' ? 'M' :
+                                            category === 'Female' ? 'F' :
+                                            category === 'Yes' ? '1' :
+                                            category === 'No' ? '0' : category;
+                    
+                                const count = groupedData[key].count;
+                                const maxStay = Math.max(...filteredData.filter(item => item[variable] === key).map(item => item.hosp_stay));
+                                const minStay = Math.min(...filteredData.filter(item => item[variable] === key).map(item => item.hosp_stay));
+                                const percentage = ((count / filteredData.length) * 100).toFixed(2);
+                                // Return the label text without the color box
+                                return [
+                                    `Average Stay: ${averageStay} days`,
+                                    `Range: ${minStay} - ${maxStay} days`,
+                                    `Cases: ${count} (${percentage}% of total)`
+                                ];
+                            }
+                        },
+                        // Disable the color box
+                        displayColors: false
                     }
+                    
                 },
                 scales: {
                     y: {
