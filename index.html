@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="global.js"></script>
+</head>
+<body>
+    <h1>Utilizing Data Driven Approaches To Predict ICU Post-Op Length of Stay</h1>
+
+    <label for="selection">Choose an option:</label>
+    <select id="selection" name="selection">
+        <option value="sex">Gender</option>
+        <!-- <option value="age">Age</option> -->
+        <option value="department">Department</option>
+        <option value="approach">Surgical Approach</option>
+        <option value="position">Surgical Position</option>
+        <option value="ane_type">Anesthesia Type</option>
+        <option value="optype">Operation Type</option>
+        <option value="preop_ecg">Preoperative ECG</option>
+        <option value="preop_pft">Preoperative Pulmonary Function</option>
+        <option value="preop_htn">Preoperative Hypertension</option>
+        <option value="preop_dm">Preoperative Diabetes
+        <option value="death_inhosp">In-Hospital Death</option>
+    </select>
+
+    <canvas id="chart-container" width="400" height="200"></canvas>
+
+</body>
+</html>
