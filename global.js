@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         category === 'No' ? '0' : category;
             const averageStay = groupedData[key].totalStay / groupedData[key].count;
             // Round to the nearest whole number
-            return Math.round(averageStay);
+            return parseFloat(averageStay.toFixed(1));
         });
 
         // Create the bar chart using Chart.js
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const count = groupedData[key].count;
                                 const maxStay = Math.max(...filteredData.filter(item => item[variable] === key).map(item => item.hosp_stay));
                                 const minStay = Math.min(...filteredData.filter(item => item[variable] === key).map(item => item.hosp_stay));
-                                const percentage = ((count / filteredData.length) * 100).toFixed(2);
+                                const percentage = ((count / filteredData.length) * 100).toFixed(1);
                                 // Return the label text without the color box
                                 return [
                                     `Average Stay: ${averageStay} days`,
