@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...item,
                 hosp_stay: (parseFloat(item.dis) - parseFloat(item.adm)) / 86400, // Calculate hospital stay length in days
                 bmi_category: getBMICategory(item.bmi), // Calculate BMI category) 
+                preop_alb_categ: getAlbuminCategory(item.preop_alb), // Calculate albumin category
+                preop_hb_categ: getHemoglobinRange(item.preop_hb) // Calculate hemoglobin range
             }));
 
             // Initially display data for the first variable
@@ -42,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'bmi_category': 'BMI',
         'age': 'Age',
         'asa': 'ASA Classification',
+        'emop': 'Emergency Operation',
+        'preop_alb_categ': 'Preoperative Albumin (g/dL)',
+        'preop_hb_categ': 'Preoperative Hemoglobin (g/dL)',
     };
 
     function getBMICategory(bmi) {
@@ -57,6 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
             return "Severely Obese";
         }
     }
+
+    function getAlbuminCategory(albuminLevel) {
+        if (albuminLevel >= 0.0 && albuminLevel <= 0.9) {
+            return "0.0–0.9";
+        } else if (albuminLevel >= 1.0 && albuminLevel <= 1.9) {
+            return "1.0–1.9";
+        } else if (albuminLevel >= 2.0 && albuminLevel <= 2.9) {
+            return "2.0–2.9";
+        } else if (albuminLevel >= 3.0 && albuminLevel <= 3.9) {
+            return "3.0–3.9";
+        } else if (albuminLevel >= 4.0 && albuminLevel <= 4.9) {
+            return "4.0–4.9";
+        } else if (albuminLevel >= 5.0 && albuminLevel <= 5.9) {
+            return "5.0+";
+        }
+    }
+
+    function getHemoglobinRange(hemoglobinLevel) {
+        if (hemoglobinLevel < 8.0) {
+            return "0.0–7.9";
+        } else if (hemoglobinLevel >= 8.0 && hemoglobinLevel <= 10.9) {
+            return "8.0–10.9";
+        } else if (hemoglobinLevel >= 11.0 && hemoglobinLevel <= 12.9) {
+            return "11.0–12.9";
+        } else if (hemoglobinLevel >= 13.0 && hemoglobinLevel <= 17.0) {
+            return "13.0–17.0";
+        } else if (hemoglobinLevel > 17.0) {
+            return "17.1+";
+        }
+    }    
+        
     
     // Function to update the bar chart based on the selected variable
     function updateChart(variable) {
