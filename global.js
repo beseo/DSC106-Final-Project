@@ -197,13 +197,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }).sort((a, b) => {
             if (variable === 'bmi_category') {
                 // Define the custom order for BMI categories
-                return customOrder.indexOf(a) - customOrder.indexOf(b); 
+                return customOrder.indexOf(a) - customOrder.indexOf(b);
             }
-            // Custom sorting for bins (e.g., "0-7", "8-10")
-            const startA = parseInt(a.split('-')[0]) || 0; // Extract the starting number of the range
-            const startB = parseInt(b.split('-')[0]) || 0;
-            return startA - startB; // Sort numerically
+            // Handle keys with numeric ranges or decimals
+            const parseKey = (key) => {
+                const start = parseFloat(key.split('-')[0]) || parseFloat(key); // Extract or parse the first number
+                return start;
+            };
+            const startA = parseKey(a);
+            const startB = parseKey(b);
+            return startA - startB; // Sort numerically, including decimals
         });
+        
         
 
         const averages = categories.map(category => {
