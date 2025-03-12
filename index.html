@@ -10,7 +10,51 @@
     <script src="global.js"></script>
 </head>
 <body>
-    <h1>Utilizing Data Driven Approaches To Predict ICU Post-Op Length of Stay</h1>
+    <h1>Utilizing Data Driven Approaches To Predict Post-Op Hospital Stay Length</h1>
+
+
+    <h3>Background</h3>
+    <p>
+        <p>
+            Your body already knows how long you'll be in the hospital after surgery. The question is — <b>can we decode the signals in time?</b>
+            That is to ask: Can we predict hospital stay length based on preoperative measurements? <br><br>
+    
+            This is an important question to ask because it can benefit many stakeholders, not just the patient.
+            Answering this question could allow hospitals, insurance companies, and others to better manage their businesses.
+            <br>
+    
+            <b>Patient benefits:</b><br>
+            - Being able to tell family their predicted hospital stay <br>
+            - Time management, better future planning/preparation<br>
+            - Monetary / insurance costs<br>
+            - Financial planning <br>
+            <b>Hospital benefits:</b> <br>
+            - Service quality <br>
+            - Resource management <br>
+            - Can predict how much money they will make from a given hospital stay (because hospitals are driven by profits as well) <br>
+            - Financial planning <br>
+    
+            <b>Insurance company benefits:</b><br>
+            - Financial planning <br>
+            - How much will this hospital stay cost? <br>
+            - Who is at risk for certain pre-operative measurements that may cost the company more money? <br>
+        </p>
+    </p>
+
+    <h3>Methods:</h3>
+    <p>
+        There are many measurable factors that contribute to being able to predict the length of one's hospital stay before a doctor begins operation. 
+        In this study, we looked into the features (column names on the dataset in parenthesis): <br>
+        - BMI <br>
+        - Age <br>
+        - Sex <br>
+        - preoperative albumin level (preop_alb) <br>
+        - ASA Physical status classification (asa) <br>
+        - preoperative hemoglobin level (preop_hb) <br>
+        - surgery type (optype) <br>
+        - emergency operation - yes/no (emop) <br>
+        - surgical department (department) <br>
+    </p>
 
     <select id="selection" name="selection">
         <option value="start_option" disabled selected>Select an option</option>
@@ -32,7 +76,6 @@
         <option value="preop_alb_categ">Preoperative Albumin</option>
         <option value="preop_hb_categ">Preoperative Hemoglobin</option>
     </select>
-
     <div class="container">
         <div class="chart-wrapper">
             <canvas id="chart-container" width="400" height="200"></canvas>
@@ -43,7 +86,6 @@
             <p id="variable-explanation"></p>
         </div>
     </div>
-    
 
 </body>
 </html>
