@@ -23,11 +23,65 @@ document.addEventListener('DOMContentLoaded', () => {
             }));
 
             // Initially display data for the first variable
-            updateChart('asa');
+            updateChart('start_option');
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
         }
     }
+
+    const variableExplanations = {
+        'start_option': 'Select a variable to see its explanation here.',
+        'department': `Surgical departments are specialized areas within a hospital dedicated to specific types of operations.
+            <ul id="list_categories">
+                <li><strong>General Surgery:</strong> Includes a wide range of procedures like appendectomies or hernia repairs.</li>
+                <li><strong>Gynecology:</strong> Focuses on surgeries for the female reproductive system (e.g., hysterectomy).</li>
+                <li><strong>Urology:</strong> Treats the urinary system and male reproductive organs (e.g., kidney stones, prostate surgery).</li>
+                <li><strong>Thoracic Surgery:</strong> Focuses on surgeries involving the chest, including the lungs, esophagus, and chest wall (e.g., lung cancer removal). </li>
+            </ul>`,
+        'approach': `Surgical approaches are ways to perform operations based on the procedure and patient's needs.
+            <ul id="list_categories">
+                <li><strong>Open:</strong> Traditional method with a large incision to access the surgical area directly.</li>
+                <li><strong>Robotic:</strong> Precision surgery using robotic tools controlled by the surgeon, often with small incisions.</li>
+                <li><strong>Videoscopic:</strong> Minimally invasive method using small incisions and a camera for visualization (e.g., laparoscopic surgery).</li>
+            </ul>`,
+        'ane_type': `The types of anesthesia used furing medical procedures.
+            <ul id="list_categories">
+                <li><strong>General:</strong> Induces complete unconsciousness. The patient is asleep and feels no pain during surgery. Used for major operations like heart or abdominal surgeries.</li>
+                <li><strong>Spinal:</strong> Regional anesthesia that numbs the lower half of the body by injecting medication into spinal fluid. Used for procedures like cesarean sections or knee replacements.</li>
+                <li><strong>Sedationalgesia:</strong> Conscious sedation where the patient remains awake but deeply relaxed and pain-free. Used for minimally invasive procedures like endoscopies or dental work.</li>
+            </ul>`,
+        'sex': 'Patient gender: Male or Female.',
+        'position': 'Surgical position during the operation (e.g., Supine, Prone).',
+        'death_inhosp': 'Indicates whether the patient passed away during the hospital stay (Yes/No).',
+        'preop_ecg': 'Preoperative ECG status (e.g., Normal, Abnormal).',
+        'optype': 'The types of operation performed.',
+        'preop_pft': 'Preoperative pulmonary function test status (e.g., Normal, Reduced).',
+        'preop_htn': 'Indicates if the patient had preoperative hypertension (Yes/No).',
+        'preop_dm': 'Indicates if the patient had preoperative diabetes mellitus (Yes/No).',
+        'bmi_category': `Body Mass Index (BMI) measures body weight relative to height.
+            <ul id="list_categories">
+                <li><strong>Underweight:</strong> BMI < 18.5. May indicate insufficient weight for good health.</li>
+                <li><strong>Normal Weight:</strong> BMI 18.5–24.9. Considered healthy and lowers health risks.</li>
+                <li><strong>Overweight:</strong> BMI 25–29.9. Higher weight, increasing risk of health issues.</li>
+                <li><strong>Obese:</strong> BMI 30–39.9. High body fat with significant health risks.</li>
+                <li><strong>Severely Obese:</strong> BMI ≥ 40. Very high body fat with serious health concerns.</li>
+            </ul>`,
+        'age': 'The age of the patient in years ranging from 0.3 to 94 years old.',
+        'asa': `The American Society of Anesthesiologists (ASA) Physical Status Classification System evaluates a patient's physical health before surgery.
+            <ul id="list_categories">
+                <li><strong>ASA 1:</strong> A normal healthy patient.</li>
+                <li><strong>ASA 2:</strong> A patient with mild systemic disease (e.g., controlled high blood pressure).</li>
+                <li><strong>ASA 3:</strong> A patient with severe systemic disease that limits activity.</li>
+                <li><strong>ASA 4:</strong> A patient with life-threatening severe systemic disease.</li>
+                <li><strong>ASA 5:</strong> A moribund patient who is unlikely to survive without the operation.</li>
+                <li><strong>ASA 6:</strong> A declared brain-dead patient with plans for organ donation.</li>
+            </ul>
+            <i>Note: ASA 5 is not included in this chart as there is no patient data containing ASA 5.</i>`,
+        'emop': 'Whether the surgery was an emergency operation (Yes/No).',
+        'preop_alb_categ': 'Preoperative Albumin levels categorized by range (e.g., 0.0–0.9, 1.0–1.9).',
+        'preop_hb_categ': 'Preoperative Hemoglobin levels categorized by range (e.g., 0.0–7.9, 8.0–10.9).',
+    };
+    
 
     const variableToFullName = {
         'department': 'Department',
@@ -93,6 +147,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }    
         
+    document.getElementById('selection').addEventListener('change', (event) => {
+        const selectedValue = event.target.value;
+        const overlayMessage = document.getElementById('overlay-message');
+        
+        // Hide the overlay only if the user selects a valid option
+        if (selectedValue !== "start_option") {
+            overlayMessage.style.visibility = "hidden";
+        } else {
+            overlayMessage.style.visibility = "visible";
+        }
+    });
     
     // Function to update the bar chart based on the selected variable
     function updateChart(variable) {
@@ -113,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
             groupedData[key].count += 1;
         });
 
+        const customOrder = ['Underweight', 'Normal', 'Overweight', 'Obese', 'Severely Obese'];
+
         const categories = Object.keys(groupedData).map(key => {
             // Handle 0 and 1 as Yes/No, and 'm' and 'f' as Male/Female
             if (variable === 'sex') {
@@ -127,7 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 return key;
             }
-        }).sort();
+        }).sort((a, b) => {
+            if (variable === 'bmi_category') {
+                // Define the custom order for BMI categories
+                return customOrder.indexOf(a) - customOrder.indexOf(b); 
+            }
+            // Custom sorting for bins (e.g., "0-7", "8-10")
+            const startA = parseInt(a.split('-')[0]) || 0; // Extract the starting number of the range
+            const startB = parseInt(b.split('-')[0]) || 0;
+            return startA - startB; // Sort numerically
+        });
+        
 
         const averages = categories.map(category => {
             // Get the average stay for each category
@@ -157,11 +234,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: {
+                maintainAspectRatio: false, // Prevent aspect ratio locking
                 responsive: true,
                 plugins: {
                     title: {
                         display: true,
-                        text: `Average Length of Hospital Stay by ${variableToFullName[variable]}`,
+                        text: (variable === 'start_option')
+                            ? "Average Length of Hospital Stay"
+                            :`Average Length of Hospital Stay by ${variableToFullName[variable]}`,
                         font: {
                             size: 18,
                             weight: 'bold',
@@ -232,13 +312,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        // Update the explanation box
+        const explanationBox = document.getElementById('variable-explanation');
+        explanationBox.textContent = variableExplanations[variable] || 'Explanation not available.';
     }
 
-    // Add event listener to the dropdown menu
-    const dropdown = document.getElementById('selection');
-    dropdown.addEventListener('change', (event) => {
+    // Update explanation dynamically based on the selected variable
+    document.getElementById('selection').addEventListener('change', (event) => {
         const selectedVariable = event.target.value;
         updateChart(selectedVariable);
+        const explanationBox = document.getElementById('variable-explanation');
+
+        // Update the explanation text (allow HTML content for ASA)
+        explanationBox.innerHTML = variableExplanations[selectedVariable] || 'Explanation not available.';
     });
 
     // Load data when the page loads

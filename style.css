@@ -1,5 +1,5 @@
 body {
-    max-width: 100ch; 
+    max-width: 110ch; 
     margin-inline: auto; 
     padding: 1.5em;
     font-family: 'Arial', sans-serif;
@@ -23,10 +23,13 @@ select {
     background-color: white;
 }
 
-.chart-container {
-    background: white;
+#chart-container {
     padding: 20px;
-    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 5px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -39,3 +42,82 @@ select {
     fill: #357ABD !important;
     opacity: 1;
 }
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    width: 100%;
+}
+
+/* Explanation box styling */
+#explanation-box {
+    flex-shrink: 0;
+    margin: 0;
+    width: 25%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#explanation-box h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#explanation-box p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        align-items: center; /* Center-align elements */
+    }
+
+    #chart-container {
+        width: 100%; /* Make chart take full width */
+    }
+
+    #explanation-box {
+        width: 100%; /* Make explanation box take full width */
+    }
+}
+
+.overlay-message {
+    margin: 0;
+    position: absolute; /* Position over the chart */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover the full width of the chart */
+    height: 100%; /* Cover the full height of the chart */
+    background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+    display: flex; /* Center the text */
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 5px; /* Match the chart border radius */
+    pointer-events: none; /* Allow interactions with the canvas beneath */
+    visibility: visible; /* Show the overlay by default */
+}
+
+.chart-wrapper {
+    position: relative; /* Enables positioning of child elements */
+    width: 100%; /* Ensure it adapts to container width */
+    max-width: 100%;
+}
+
+#selection {
+    padding: 8px;
+}
+
+/* #list_categories {
+    list-style-type: none;
+} */

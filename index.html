@@ -12,8 +12,8 @@
 <body>
     <h1>Utilizing Data Driven Approaches To Predict ICU Post-Op Length of Stay</h1>
 
-    <label for="selection">Choose an option:</label>
     <select id="selection" name="selection">
+        <option value="start_option" disabled selected>Select an option</option>
         <option value="asa">ASA</option>
         <option value="age">Age</option>
         <option value="sex">Gender</option>
@@ -33,7 +33,17 @@
         <option value="preop_hb_categ">Preoperative Hemoglobin</option>
     </select>
 
-    <canvas id="chart-container" width="400" height="200"></canvas>
+    <div class="container">
+        <div class="chart-wrapper">
+            <canvas id="chart-container" width="400" height="200"></canvas>
+            <div class="overlay-message" id="overlay-message">Please select an option to explore</div>
+        </div>        
+        <div id="explanation-box">
+            <h3>Variable Explanation</h3>
+            <p id="variable-explanation"></p>
+        </div>
+    </div>
+    
 
 </body>
 </html>
