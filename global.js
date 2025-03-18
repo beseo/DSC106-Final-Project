@@ -106,11 +106,18 @@ function renderHospitalStayDistribution(stayDistribution) {
     
     // Define the correct order of the categories
     const categoryOrder = ['0-5 days', '6-10 days', '11-15 days', '16-20 days', '21-25 days', '25+ days'];
-    // Set the data for the bar chart
+
+    // Ensure that every category in categoryOrder is included in the result, even with a count of 0
+    categoryOrder.forEach(category => {
+        if (!stayDistribution[category]) {
+            stayDistribution[category] = 0;
+        }
+    });
+
     const data = Object.entries(stayDistribution).map(([category, count]) => ({
         category,
         count
-    }));
+    })).sort((a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category));
 
     // Set the scales
     const x = d3.scaleBand()
@@ -141,7 +148,8 @@ function renderHospitalStayDistribution(stayDistribution) {
         .call(d3.axisLeft(y));
 
     // Create the bars
-    svg.selectAll(".bar")
+    // Create the bars
+    const bars = svg.selectAll(".bar")
         .data(data)
         .enter()
         .append("rect")
@@ -183,6 +191,31 @@ function renderHospitalStayDistribution(stayDistribution) {
             .style('text-anchor', 'middle')  // Ensure the text is centered horizontally
             .text('Hospital Stay Distribution')
             .style('font-weight', 'bold') ;
+
+        // Create a tooltip div (hidden by default)
+        const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.75)")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("font-size", "14px");
+
+        // Add hover interaction to bars
+        bars.on("mouseover", function(event, d) {
+            // Show the tooltip and position it near the mouse cursor
+            tooltip.style("visibility", "visible")
+                .text(`Cases: ${d.count}`)
+                .style("top", `${event.pageY + 10}px`)
+                .style("left", `${event.pageX + 10}px`);
+        })
+        .on("mouseout", function() {
+            // Hide the tooltip when mouse leaves the bar
+            tooltip.style("visibility", "hidden");
+        });
 
 }
 

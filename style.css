@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-    max-width: 120ch; 
+    max-width: 130ch; 
     margin: 0 auto;
     padding: 0 1em;
     font-family: 'Helvetica Neue', sans-serif;
@@ -41,9 +41,10 @@ body {
     grid-template-columns: 1fr 300px;
     gap: 20px;
     padding: 20px;
-    width: 100%; /* Full width */
+    max-width: 130ch;
     margin: 0 auto;
-    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
 }
 
 /* Introduction Section */

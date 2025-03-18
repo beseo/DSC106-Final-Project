@@ -244,15 +244,15 @@ const variableToFullName = {
 
 function getHospitalStayCategory(hospStayLength) {
     if (hospStayLength >= 0 && hospStayLength <= 5) {
-        return "0–5 days";
+        return "0-5 days";
     } else if (hospStayLength >= 6 && hospStayLength <= 10) {
-        return "6–10 days";
+        return "6-10 days";
     } else if (hospStayLength >= 11 && hospStayLength <= 15) {
-        return "11–15 days";
+        return "11-15 days";
     } else if (hospStayLength >= 16 && hospStayLength <= 20) {
-        return "16–20 days";
+        return "16-20 days";
     } else if (hospStayLength >= 21 && hospStayLength <= 25) {
-        return "21–25 days";
+        return "21-25 days";
     } else if (hospStayLength > 25) {
         return "25+ days";
     } else {
