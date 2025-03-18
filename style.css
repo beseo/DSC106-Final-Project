@@ -40,7 +40,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 20px;
-    padding: 20px 0;
+    padding: 20px;
     width: 100%; /* Full width */
     margin: 0 auto;
     box-sizing: border-box;
@@ -88,7 +88,7 @@ body {
 
 /* Chart Section */
 .chart-section, .scrolly, .scroll-container {
-    margin-left: 0.5em;
+    margin-left: 1em;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -244,14 +244,13 @@ html {
     border: 1px solid #ddd; /* Subtle border */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
-    font-family: Arial, sans-serif; /* Font style */
 }
 
 /* Align the label and dropdown side-by-side */
 .form-group {
     display: flex; /* Use Flexbox for horizontal alignment */
     align-items: center; /* Align vertically to the center */
-    margin-bottom: 1em; /* Space between form elements */
+    margin-bottom: 0.5em; /* Space between form elements */
 }
 
 /* Label Styling */
@@ -288,7 +287,7 @@ input[type="checkbox"] {
 }
 
 /* Button Styling */
-button {
+#filter-button {
     display: block; /* Place the button on its own line */
     padding: 0.7em; /* Adds padding */
     border: none; /* Removes border */
@@ -302,6 +301,18 @@ button {
 }
 
 /* Hover Effect for Button */
-button:hover {
+#filter-button:hover {
     background-color: #1a746f; /* Darker blue on hover */
+}
+
+.distribution {
+    padding: 2em 0;
+    width: 100%;
+    display: flex;  /* Use flexbox to align elements side by side */
+    justify-content: space-between;  /* Optional: adds space between the chart and result */
+    align-items: flex-start;  /* Align items at the top */
+}
+
+.model {
+    padding: 20px;
 }
