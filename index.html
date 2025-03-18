@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="global.js"></script>
+    <script src="updateChart.js"></script>
+    <script type="module" src="global.js"></script>
 </head>
 <body>
     <!-- Hero Section -->
@@ -33,7 +34,6 @@
         </section>
 
 
-
         <!-- Chart Section -->
         <section class="chart-section">
             <h2>Explore Hospital Stay Predictors</h2>
@@ -44,7 +44,7 @@
             <select id="selection" name="selection">
                 <option value="start_option" disabled selected>Select a variable</option>
                 <option value="asa">ASA</option>
-                <option value="age">Age</option>
+                <option value="age_group">Age</option>
                 <option value="sex">Gender</option>
                 <option value="bmi_category">BMI</option>
                 <option value="department">Department</option>

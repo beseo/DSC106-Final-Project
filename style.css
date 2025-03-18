@@ -1,11 +1,13 @@
 /* General Styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
+    max-width: 120ch; 
+    margin: 0 auto;
+    padding: 0 1em;
+    font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     background-color: #f8f9fa;
     color: #333;
+    scroll-behavior: smooth;
 }
 
 /* Hero Section */
@@ -38,9 +40,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0;
     width: 100%; /* Full width */
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /* Introduction Section */
@@ -77,6 +80,10 @@ body {
 
 /* Chart Section */
 .chart-section {
+    max-width: 100%; /* Ensures the section doesn't exceed the body width */
+    margin: 0 auto; /* Center-align the section */
+    box-sizing: border-box;
+
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -132,6 +139,10 @@ body {
 
 /* Explanation Box */
 .explanation-box {
+    max-width: 100%; /* Ensures the section doesn't exceed the body width */
+    margin: 0 auto; /* Center-align the section */
+    box-sizing: border-box;
+
     background-color: white;
     padding: 20px;
     border-radius: 10px;
