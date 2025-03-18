@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,10 +27,53 @@
                 By analyzing preoperative data, we aim to help patients, hospitals, and insurance companies 
                 better plan and manage resources.
             </p>
-            <button class="cta-button" onclick="scrollToChart()">Explore the Data</button>
-            <p>Top three most important features go here, i'm not sure why it's not allowing me to make another section without messing up the stuff below</p>
-        </section>
+            
+            <div class="center-wrapper">
+                <button class="cta-button" onclick="scrollToChart()">Explore the Data</button>
+            </div>            
 
+            <section>
+                <h2>Top Factors Impacting Hospital Stay Length</h2>
+                <p>
+                    We utilized a machine learning method, specifically a Random Tree Classifier, 
+                    to identify the top three most important features that impact the length of hospital stay from the dataset.
+                </p>
+                <p>Here are the key features we discovered:</p>
+                <ul>
+                    <li><strong>Preoperative Albumin (preop_alb):</strong> Indicates nutritional status and correlates with recovery times.</li>
+                    <li><strong>Operation Type - Colorectal (optype_colorectal):</strong> Reflects the impact of colorectal surgeries.</li>
+                    <li><strong>Operation Type - Stomach (optype_stomach):</strong> Accounts for stomach surgeries and their associated recovery requirements.</li>
+                </ul>
+                <p>
+                    You can explore these variables in the interactive visualization below.
+                </p>
+
+                <div class="scrolly">
+                    <div class="graphic-container">
+                        <canvas id="graphicCanvas"></canvas>
+                        <div class="overlay-message" id="overlay-message2">Scroll down the right-hand navigation to see the top three most important features!</div>
+                    </div>
+            
+                    <div class="scroll-container">
+                        <section class="text-section" data-variable="preop_alb_categ">
+                          <h2>Albumin Level</h2>
+                          <p>This is the first section of content.</p>
+                        </section>
+                        <section class="text-section" data-variable="optype_Colorectal">
+                          <h2>Operation Type (Colorectal)</h2>
+                          <p>This is the second section of content.</p>
+                        </section>
+                        <section class="text-section" data-variable="optype_Stomach">
+                          <h2>Operation Type (Stomach)</h2>
+                          <p>This is the third section of content.</p>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <h2>More Exploration</h2>
+
+        </section>
 
         <!-- Chart Section -->
         <section class="chart-section">
@@ -74,8 +115,7 @@
         </aside>
 
         <section class = "model">
-            <p>predictor goes here, see html</p>
-
+            <h2>Average Hospital Stay Analysis Tool</h2>
         </section>
     </main>
 

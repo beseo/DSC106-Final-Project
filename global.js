@@ -30,32 +30,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Initially display data for the first variable
             updateChart('start_option', 'chart-container');
+            // Render the default graph on page load
+            updateChart('start_option', 'graphicCanvas');
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
         }
     }  
-        
+
+    let selectedVariable = 'start_option';
+    const explanationBox = document.getElementById('variable-explanation');
+ 
     document.getElementById('selection').addEventListener('change', (event) => {
-        const selectedValue = event.target.value;
+        selectedVariable = event.target.value;
         const overlayMessage = document.getElementById('overlay-message');
         
         // Hide the overlay only if the user selects a valid option
-        if (selectedValue !== "start_option") {
+        if (selectedVariable !== "start_option") {
             overlayMessage.style.visibility = "hidden";
         } else {
             overlayMessage.style.visibility = "visible";
         }
-    });
-
-    // Update explanation dynamically based on the selected variable
-    document.getElementById('selection').addEventListener('change', (event) => {
-        const selectedVariable = event.target.value;
         updateChart(selectedVariable, 'chart-container');
-        const explanationBox = document.getElementById('variable-explanation');
-
         // Update the explanation text (allow HTML content for ASA)
         explanationBox.innerHTML = variableExplanations[selectedVariable] || 'Explanation not available.';
     });
+
+    const sections = document.querySelectorAll('.text-section');
+    const scrolly = document.querySelector('.scrolly'); // Select the scrolly container
+    const scrollyHeight = scrolly.offsetHeight; // Get the height of scrolly
+    const scrollyMidPoint = scrollyHeight / 2; // Calculate the middle point of scrolly
+    let activeVariable = null;
+
+    // Function to handle scroll and update chart/graphics
+    function handleMainScroll() {
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const scrollyRect = scrolly.getBoundingClientRect(); // Scrolly's position
+
+            // Check if the middle of the section is in the middle of scrolly
+            const sectionMidPoint = (rect.top + rect.bottom) / 2;
+            const isCentered = sectionMidPoint >= scrollyRect.top + scrollyMidPoint - 100 && // Adjust margin for precision
+                               sectionMidPoint <= scrollyRect.top + scrollyMidPoint + 100;
+
+            if (isCentered) {
+                const variable = section.getAttribute('data-variable');
+    
+                if (activeVariable !== variable) {
+                    activeVariable = variable;
+
+                    // Update chart and explanation dynamically
+                    console.log(`Updating chart with variable: ${variable}`);
+                    const overlayMessage = document.getElementById('overlay-message2');
+        
+                    // Hide the overlay only if the user selects a valid option
+                    if (variable !== "start_option") {
+                        overlayMessage.style.visibility = "hidden";
+                    } else {
+                        overlayMessage.style.visibility = "visible";
+                    }
+
+                    updateChart(variable, 'graphicCanvas');
+                }
+            }
+        });
+    }
+    // Attach the scroll listener to the scroll-container
+    const scrollContainer = document.querySelector('.scroll-container');
+    scrollContainer.addEventListener('scroll', handleMainScroll);
 
     // Load data when the page loads
     loadData();
