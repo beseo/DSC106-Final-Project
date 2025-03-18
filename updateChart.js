@@ -240,6 +240,8 @@ const variableToFullName = {
     'emop': 'Emergency Operation',
     'preop_alb_categ': 'Preoperative Albumin (g/dL)',
     'preop_hb_categ': 'Preoperative Hemoglobin (g/dL)',
+    'optype_Colorectal': 'Operation Type (Colorectal)',
+    'optype_Stomach': 'Operation Type (Stomach)'
 };
 
 function getAgeGroup(age) {

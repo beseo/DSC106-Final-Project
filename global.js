@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const csvData = await response.text();
-            const parsedData = Papa.parse(csvData, { header: true });
+            const parsedData = Papa.parse(csvData, { 
+                header: true, 
+                skipEmptyLines: true 
+            });
 
             // Log the parsed data to the console
             console.log('Fetched Data:', parsedData.data);
@@ -20,13 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 bmi_category: getBMICategory(item.bmi), // Calculate BMI category) 
                 preop_alb_categ: getAlbuminCategory(item.preop_alb), // Calculate albumin category
                 preop_hb_categ: getHemoglobinRange(item.preop_hb), // Calculate hemoglobin range
-                age_group: getAgeGroup(item.age)
+                age_group: getAgeGroup(item.age),
+                optype_Colorectal: item.optype === 'Colorectal' ? "1" : "0", // Encode operation type
+                optype_Stomach: item.optype === 'Stomach' ? "1" : "0"    // Encode operation type
             }));
+
+            console.log('Processed Clinical Info:', window.clinicalInfo);
 
             // Initially display data for the first variable
             updateChart('start_option', 'chart-container');
             // Render the default graph on page load
-            updateChart('preop_alb_categ', 'graphicCanvas');
+            updateChart('start_option', 'graphicCanvas');
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
         }
@@ -65,9 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = section.getBoundingClientRect();
             const scrollyRect = scrolly.getBoundingClientRect(); // Scrolly's position
 
-            console.log(`Section ${index} - top: ${rect.top}, bottom: ${rect.bottom}`);
-            console.log(`Scrolly Midpoint: ${scrollyMidPoint}, Scrolly Rect: ${scrollyRect.top}`);
-
             // Check if the middle of the section is in the middle of scrolly
             const sectionMidPoint = (rect.top + rect.bottom) / 2;
             const isCentered = sectionMidPoint >= scrollyRect.top + scrollyMidPoint - 100 && // Adjust margin for precision
@@ -75,12 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (isCentered) {
                 const variable = section.getAttribute('data-variable');
-                console.log(`Currently centered variable: ${variable}`);
+    
                 if (activeVariable !== variable) {
                     activeVariable = variable;
 
                     // Update chart and explanation dynamically
                     console.log(`Updating chart with variable: ${variable}`);
+                    const overlayMessage = document.getElementById('overlay-message2');
+        
+                    // Hide the overlay only if the user selects a valid option
+                    if (variable !== "start_option") {
+                        overlayMessage.style.visibility = "hidden";
+                    } else {
+                        overlayMessage.style.visibility = "visible";
+                    }
+
                     updateChart(variable, 'graphicCanvas');
                 }
             }

@@ -91,6 +91,9 @@ select {
 }
 
 .overlay-message {
+    padding: 6em;
+    box-sizing: border-box;
+    text-align: center;
     margin: 0;
     position: absolute; /* Position over the chart */
     top: 0;
@@ -129,7 +132,7 @@ select {
     overflow-y: scroll;
     height: 70vh;
     transition: all 0.5s ease-in-out;
-
+    padding: 0 10px;
     border-left: 2px solid gray; /* Adjust thickness and color */
 }
 
