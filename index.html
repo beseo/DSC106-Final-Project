@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Stay Predictors</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="updateChart.js"></script>
@@ -116,35 +117,38 @@
         </aside>
 
         <section class = "model">
-            <h2>Average Hospital Stay Analysis Tool</h2>
+            <h2>Hospital Stay Filter & Analysis Tool</h2>
             <p>Filter patients and visualize hospital stay length.</p>
             <div class="form-container">
-                <form>
+                <form id="filter-form">
                     <div class="form-group">
                         <label for="albumin-category">Albumin Range (g/dL):</label>
                         <select id="albumin-category" name="albumin-category">
                             <option value="start" disabled selected>Select</option>
-                            <option value="low">0–2.4</option>
-                            <option value="moderate">2.5–3.4</option>
-                            <option value="normal">3.5–4.9</option>
-                            <option value="high">5.0+</option>
+                            <option value="0.0–2.4">0.0–2.4</option>
+                            <option value="2.5–3.4">2.5–3.4</option>
+                            <option value="3.5–4.9">3.5–4.9</option>
+                            <option value="5.0+">5.0+</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" name="option1" value="Option 1">
+                            <input type="checkbox" id="colorectal-checkbox" name="operation" value="colorectal">
                             Operation Type (Colorectal)
                         </label>
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" name="option2" value="Option 2">
+                            <input type="checkbox" id="stomach-checkbox" name="operation" value="stomach">
                             Operation Type (Stomach)
                         </label>
                     </div>
-                    <button>Show Data</button>
+                    <button id="filter-button" type="button" onclick="filterData()">Show Data</button>
                 </form>
             </div>
+            
+            <div id="result" style="margin-top: 20px;"></div>  
+            <div id="hospitalStayChart"></div>           
             
         </section>
     </main>

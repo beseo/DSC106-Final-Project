@@ -87,7 +87,7 @@ body {
 }
 
 /* Chart Section */
-.chart-section {
+.chart-section, .scrolly, .scroll-container {
     margin-left: 0.5em;
     background-color: white;
     padding: 20px;
@@ -188,7 +188,7 @@ footer {
     height: 70vh;
     transition: all 0.5s ease-in-out;
     padding: 0 10px;
-    border-left: 2px solid gray; /* Adjust thickness and color */
+    border-left: 2px solid lightgray; /* Border thickness and color */
 }
 
 .text-section {
@@ -224,6 +224,8 @@ html {
 }
 
 .scrolly {
+    padding: 0;
+    margin: 0;
     position: relative; /* Keeps the container in view */
     top: 0; /* Sticks the top of the container to the top of the page */
     height: 70vh; /* Makes it the full height of the viewport */
@@ -232,16 +234,13 @@ html {
     justify-content: center;
     align-items: center;
     z-index: 1; /* Adjust as necessary to control stacking order */
-
-    border: 2px solid gray; /* Adjust thickness and color */
-    border-radius: 5px; /* Optional: Add rounded corners */
 }
 
 /* Container Styling */
 .form-container {
     max-width: 400px; /* Limit form width */
     padding: 1.5em; /* Padding inside the form */
-    background-color: #f9f9f9; /* Light background */
+    background-color: white; /* Light background */
     border: 1px solid #ddd; /* Subtle border */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
@@ -262,13 +261,26 @@ form label {
 }
 
 /* Dropdown Styling */
-select {
+#albumin-category {
     flex: 1; /* Allow the dropdown to adjust width dynamically */
     padding: 0.5em; /* Inner padding for usability */
     border: 1px solid #ccc; /* Subtle border */
     border-radius: 5px; /* Rounded corners */
     font-size: 1em; /* Font size for readability */
 }
+
+#albumin-category:hover {
+    cursor: pointer;
+    border-color: #21918c; /* Highlight border on hover */
+    box-shadow: 0 0 8px rgba(33, 145, 140, 0.3); /* Subtle shadow on hover */
+}
+
+#albumin-category:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #21918c; /* Highlight border when focused */
+    box-shadow: 0 0 8px rgba(33, 145, 140, 0.5); /* Stronger shadow when focused */
+}
+
 
 /* Checkbox Styling */
 input[type="checkbox"] {
@@ -278,10 +290,9 @@ input[type="checkbox"] {
 /* Button Styling */
 button {
     display: block; /* Place the button on its own line */
-    width: 100%; /* Full-width button */
     padding: 0.7em; /* Adds padding */
     border: none; /* Removes border */
-    background-color: #007BFF; /* Button background color */
+    background-color:  #21918c; /* Button background color */
     color: white; /* Button text color */
     font-size: 1em; /* Font size */
     font-weight: bold; /* Highlight the button text */
@@ -292,5 +303,5 @@ button {
 
 /* Hover Effect for Button */
 button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #1a746f; /* Darker blue on hover */
 }

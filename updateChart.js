@@ -1,9 +1,7 @@
 const chartInstances = {}; // Tracks chart instances by canvas ID
 
 // Function to update the bar chart based on the selected variable
-function updateChart(variable, container) {
-    const data = window.clinicalInfo;
-
+function updateChart(variable, container, data) {
     // Filter out records with undefined values for the selected variable
     const filteredData = data.filter(item => item[variable] !== undefined && item[variable] !== null && item[variable] !== '');
 
@@ -243,6 +241,24 @@ const variableToFullName = {
     'optype_Colorectal': 'Operation Type (Colorectal)',
     'optype_Stomach': 'Operation Type (Stomach)'
 };
+
+function getHospitalStayCategory(hospStayLength) {
+    if (hospStayLength >= 0 && hospStayLength <= 5) {
+        return "0–5 days";
+    } else if (hospStayLength >= 6 && hospStayLength <= 10) {
+        return "6–10 days";
+    } else if (hospStayLength >= 11 && hospStayLength <= 15) {
+        return "11–15 days";
+    } else if (hospStayLength >= 16 && hospStayLength <= 20) {
+        return "16–20 days";
+    } else if (hospStayLength >= 21 && hospStayLength <= 25) {
+        return "21–25 days";
+    } else if (hospStayLength > 25) {
+        return "25+ days";
+    } else {
+        return "Invalid stay length";
+    }
+}
 
 function getAgeGroup(age) {
     if (age < 13) {
