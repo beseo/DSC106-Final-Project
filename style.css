@@ -236,3 +236,61 @@ html {
     border: 2px solid gray; /* Adjust thickness and color */
     border-radius: 5px; /* Optional: Add rounded corners */
 }
+
+/* Container Styling */
+.form-container {
+    max-width: 400px; /* Limit form width */
+    padding: 1.5em; /* Padding inside the form */
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow effect */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+/* Align the label and dropdown side-by-side */
+.form-group {
+    display: flex; /* Use Flexbox for horizontal alignment */
+    align-items: center; /* Align vertically to the center */
+    margin-bottom: 1em; /* Space between form elements */
+}
+
+/* Label Styling */
+form label {
+    margin-right: 1em; /* Adds space between label and input */
+    color: #333; /* Text color */
+}
+
+/* Dropdown Styling */
+select {
+    flex: 1; /* Allow the dropdown to adjust width dynamically */
+    padding: 0.5em; /* Inner padding for usability */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1em; /* Font size for readability */
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    margin-right: 0.5em; /* Adds space between the checkbox and its label */
+}
+
+/* Button Styling */
+button {
+    display: block; /* Place the button on its own line */
+    width: 100%; /* Full-width button */
+    padding: 0.7em; /* Adds padding */
+    border: none; /* Removes border */
+    background-color: #007BFF; /* Button background color */
+    color: white; /* Button text color */
+    font-size: 1em; /* Font size */
+    font-weight: bold; /* Highlight the button text */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover Effect for Button */
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

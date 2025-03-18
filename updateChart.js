@@ -275,18 +275,16 @@ function getBMICategory(bmi) {
 }
 
 function getAlbuminCategory(albuminLevel) {
-    if (albuminLevel >= 0.0 && albuminLevel <= 0.9) {
-        return "0.0–0.9";
-    } else if (albuminLevel >= 1.0 && albuminLevel <= 1.9) {
-        return "1.0–1.9";
-    } else if (albuminLevel >= 2.0 && albuminLevel <= 2.9) {
-        return "2.0–2.9";
-    } else if (albuminLevel >= 3.0 && albuminLevel <= 3.9) {
-        return "3.0–3.9";
-    } else if (albuminLevel >= 4.0 && albuminLevel <= 4.9) {
-        return "4.0–4.9";
-    } else if (albuminLevel >= 5.0 && albuminLevel <= 5.9) {
+    if (albuminLevel < 2.5) {
+        return "0.0–2.4";
+    } else if (albuminLevel >= 2.5 && albuminLevel <= 3.4) {
+        return "2.5–3.4";
+    } else if (albuminLevel >= 3.5 && albuminLevel <= 4.9) {
+        return "3.5–4.9";
+    } else if (albuminLevel >= 5.0) {
         return "5.0+";
+    } else {
+        return "Invalid range";
     }
 }
 

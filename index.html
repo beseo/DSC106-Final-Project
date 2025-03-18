@@ -80,7 +80,8 @@
             <h2>Explore Hospital Stay Predictors</h2>
             <p class="graph-intro">
                 These are the preoperative and demographic features that we are going to look at. 
-                Select a variable from the dropdown below to see how it affects the average length of hospital stay.
+                <strong>Select a variable from the dropdown</strong> below to see how it affects the average length of hospital stay.
+                <strong>Hover over each bar</strong> to view detailed information about each category within the selected variable.
             </p>
             <select id="selection" name="selection">
                 <option value="start_option" disabled selected>Select a variable</option>
@@ -116,12 +117,41 @@
 
         <section class = "model">
             <h2>Average Hospital Stay Analysis Tool</h2>
+            <p>Filter patients and visualize hospital stay length.</p>
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="albumin-category">Albumin Range (g/dL):</label>
+                        <select id="albumin-category" name="albumin-category">
+                            <option value="start" disabled selected>Select</option>
+                            <option value="low">0–2.4</option>
+                            <option value="moderate">2.5–3.4</option>
+                            <option value="normal">3.5–4.9</option>
+                            <option value="high">5.0+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="option1" value="Option 1">
+                            Operation Type (Colorectal)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="option2" value="Option 2">
+                            Operation Type (Stomach)
+                        </label>
+                    </div>
+                    <button>Show Data</button>
+                </form>
+            </div>
+            
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>Created by Max Zou, Terran Chow, Nomin Batjargal, and Beomsuk Seo</p>
+        <p>Created by Nomin Batjargal, Max Zou, Terran Chow, and Beomsuk Seo</p>
     </footer>
 
     <script>
