@@ -2,10 +2,11 @@ body {
     max-width: 110ch; 
     margin-inline: auto; 
     padding: 1.5em;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     background-color: #f8f9fa;
     padding: 20px;
+    scroll-behavior: smooth;
 }
 
 h1 {
@@ -121,3 +122,59 @@ select {
 /* #list_categories {
     list-style-type: none;
 } */
+
+.scroll-container {
+    width: 30%;
+    float: left;
+    overflow-y: scroll;
+    height: 70vh;
+    transition: all 0.5s ease-in-out;
+
+    border-left: 2px solid gray; /* Adjust thickness and color */
+}
+
+.text-section {
+    height: 70vh;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Remove border lines */
+    border-bottom: none;
+}
+
+.graphic-container {
+    position: relative;
+    width: 70%;
+    float: left;
+    height: 70vh;
+    transition: all 0.5s ease-in-out;
+}
+
+canvas {
+    width: 70%;
+    height: 70%;
+    display: block;
+    padding: 50px;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+.scrolly {
+    position: relative; /* Keeps the container in view */
+    top: 0; /* Sticks the top of the container to the top of the page */
+    height: 70vh; /* Makes it the full height of the viewport */
+    display: flex;
+    flex-direction: row; /* Ensures graphic and scroll sections align */
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Adjust as necessary to control stacking order */
+
+    border: 2px solid gray; /* Adjust thickness and color */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}

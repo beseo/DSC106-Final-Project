@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="global.js"></script>
+    <script src="updateChart.js"></script>
+    <script type="module" src="global.js"></script>
 </head>
 <body>
     <h1>Utilizing Data Driven Approaches To Predict Post-Op Hospital Stay Length</h1>
@@ -62,7 +63,7 @@
     <select id="selection" name="selection">
         <option value="start_option" disabled selected>Select an option</option>
         <option value="asa">ASA</option>
-        <option value="age">Age</option>
+        <option value="age_group">Age</option>
         <option value="sex">Gender</option>
         <option value="bmi_category">BMI</option>
         <option value="department">Department</option>
@@ -79,6 +80,7 @@
         <option value="preop_alb_categ">Preoperative Albumin</option>
         <option value="preop_hb_categ">Preoperative Hemoglobin</option>
     </select>
+    
     <div class="container">
         <div class="chart-wrapper">
             <canvas id="chart-container" width="400" height="200"></canvas>
@@ -88,6 +90,32 @@
             <h3>Variable Explanation</h3>
             <p id="variable-explanation"></p>
         </div>
+    </div>
+
+    <div class="scrolly">
+        <div class="graphic-container">
+            <canvas id="graphicCanvas"></canvas>
+        </div>
+
+        <div class="scroll-container">
+            <section class="text-section" data-variable="preop_alb_categ">
+              <h1>Albumin Level</h1>
+              <p>This is the first section of content.</p>
+            </section>
+            <section class="text-section" data-variable="asa">
+              <h1>ASA Classification</h1>
+              <p>This is the second section of content.</p>
+            </section>
+            <section class="text-section" data-variable="bmi_category">
+              <h1>BMI</h1>
+              <p>This is the third section of content.</p>
+            </section>
+        </div>
+    </div>
+
+    <div class="next-section">
+        <h2>Next Part</h2>
+        <p>Welcome to the next part of the content.</p>
     </div>
 
 </body>
