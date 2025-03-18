@@ -89,11 +89,25 @@ body {
 }
 
 #selection {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 100%; /* Full width of its container */
+    padding: 15px; /* Increased padding for a larger box */
+    font-size: 1.2em; /* Larger font size */
+    border: 2px solid #ccc; /* Slightly thicker border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: white;
+    cursor: pointer; /* Indicates it's clickable */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+}
+
+#selection:hover {
+    border-color: #21918c; /* Highlight border on hover */
+    box-shadow: 0 0 8px rgba(33, 145, 140, 0.3); /* Subtle shadow on hover */
+}
+
+#selection:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #21918c; /* Highlight border when focused */
+    box-shadow: 0 0 8px rgba(33, 145, 140, 0.5); /* Stronger shadow when focused */
 }
 
 .chart-wrapper {
