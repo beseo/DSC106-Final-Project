@@ -81,7 +81,6 @@ function filterData(selectedAlbumin, selectedOperations, data) {
             // If category doesn't exist, initialize it with a count of 1
             acc[category] = 1;
         }
-        
         return acc;
     }, {});
 
@@ -90,106 +89,7 @@ function filterData(selectedAlbumin, selectedOperations, data) {
     return { filteredData, averageStay, stayDistribution };
 }
 
-// function renderHospitalStayDistribution(stayDistribution) {
-//     // Set the dimensions and margins for the chart
-//     const margin = { top: 40, right: 40, bottom: 80, left: 60 };
-//     const width = 800 - margin.left - margin.right;
-//     const height = 500 - margin.top - margin.bottom;
-
-//     // Append an SVG element to the DOM
-//     const svg = d3.select("#hospitalStayChart")
-//         .append("svg")
-//         .attr("width", width + margin.left + margin.right)
-//         .attr("height", height + margin.top + margin.bottom)
-//       .append("g")
-//         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-//     // Set the data for the bar chart
-//     const data = Object.entries(stayDistribution).map(([category, count]) => ({
-//         category,
-//         count
-//     }));
-
-//     // Set the scales
-//     const x = d3.scaleBand()
-//         .domain(data.map(d => d.category))
-//         .range([0, width])
-//         .padding(0.1);
-
-//     const y = d3.scaleLinear()
-//         .domain([0, d3.max(data, d => d.count)])
-//         .nice()
-//         .range([height, 0]);
-
-//     // Create the X axis
-//     svg.append("g")
-//         .selectAll(".x-axis")
-//         .data(data)
-//         .enter()
-//         .append("text")
-//         .attr("class", "x-axis")
-//         .attr("x", d => x(d.category) + x.bandwidth() / 2)
-//         .attr("y", height + 20)
-//         .attr("text-anchor", "middle")
-//         .text(d => d.category);
-
-//     // Create the Y axis
-//     svg.append("g")
-//         .attr("class", "y-axis")
-//         .call(d3.axisLeft(y));
-
-//     // Create the bars
-//     svg.selectAll(".bar")
-//         .data(data)
-//         .enter()
-//         .append("rect")
-//         .attr("class", "bar")
-//         .attr("x", d => x(d.category))
-//         .attr("y", d => y(d.count))
-//         .attr("width", x.bandwidth())
-//         .attr("height", d => height - y(d.count))
-//         .attr("fill", "#69b3a2");
-
-//         // Add x-axis label
-//         svg.append('text')
-//             .attr('class', 'axis-label')
-//             .attr('x', width / 2)
-//             .attr('y', height + margin.bottom / 1.5)
-//             .style('text-anchor', 'middle')
-//             .text('Hospital Stay Categories');
-
-//         // Add the y-axis
-//         svg.append('g')
-//             .attr('class', 'y-axis')
-//             .call(d3.axisLeft(y));
-
-//         // Add y-axis label
-//         svg.append('text')
-//             .attr('class', 'axis-label')
-//             .attr('transform', 'rotate(-90)')
-//             .attr('x', -height / 2)
-//             .attr('y', -margin.left / 1.5)
-//             .style('text-anchor', 'middle')
-//             .text('Number of Patients');
-
-//         // Add chart title
-//         svg.append('text')
-//             .attr('class', 'title')
-//             .attr('x', width / 2)
-//             .attr('y', -margin.top / 2)
-//             .text('Hospital Stay Distribution');
-// }
-
 function renderHospitalStayDistribution(stayDistribution) {
-    // Define the correct order for hospital stay categories
-    const stayCategoriesOrder = ["0–5 days", "6–10 days", "11–15 days", "16–20 days", "21–25 days", "25+ days"];
-
-    // Convert the stayDistribution object into an array and sort it
-    const sortedData = stayCategoriesOrder.map(category => ({
-        category,
-        count: stayDistribution[category] || 0 // Use 0 if the category has no data
-    }));
-
     // Set the dimensions and margins for the chart
     const margin = { top: 40, right: 40, bottom: 80, left: 60 };
     const width = 800 - margin.left - margin.right;
@@ -213,6 +113,7 @@ function renderHospitalStayDistribution(stayDistribution) {
         }
     });
 
+    // Convert stayDistribution object into an array and sort by categoryOrder
     const data = Object.entries(stayDistribution).map(([category, count]) => ({
         category,
         count
@@ -220,12 +121,12 @@ function renderHospitalStayDistribution(stayDistribution) {
 
     // Set the scales
     const x = d3.scaleBand()
-        .domain(stayCategoriesOrder) // Use the predefined order for the x-axis
+        .domain(data.map(d => d.category)) // Set domain to the sorted categories
         .range([0, width])
         .padding(0.1);
 
     const y = d3.scaleLinear()
-        .domain([0, d3.max(sortedData, d => d.count)])
+        .domain([0, d3.max(data, d => d.count)])
         .nice()
         .range([height, 0]);
 
@@ -243,7 +144,6 @@ function renderHospitalStayDistribution(stayDistribution) {
         .call(d3.axisLeft(y));
 
     // Create the bars
-    // Create the bars
     const bars = svg.selectAll(".bar")
         .data(data)
         .enter()
@@ -255,13 +155,13 @@ function renderHospitalStayDistribution(stayDistribution) {
         .attr("height", d => height - y(d.count))
         .attr("fill", "#69b3a2");
 
-        // Add x-axis label
-        svg.append('text')
-            .attr('class', 'axis-label')
-            .attr('x', width / 2)
-            .attr('y', height + margin.bottom / 1.5)
-            .style('text-anchor', 'middle')
-            .text('Hospital Stay Categories');
+    // Add x-axis label
+    svg.append('text')
+        .attr('class', 'axis-label')
+        .attr('x', width / 2)
+        .attr('y', height + margin.bottom / 1.5)
+        .style('text-anchor', 'middle')
+        .text('Hospital Stay Categories');
 
     // Add y-axis label
     svg.append('text')
@@ -272,17 +172,40 @@ function renderHospitalStayDistribution(stayDistribution) {
         .style('text-anchor', 'middle')
         .text('Number of Patients');
 
-        // Add chart title
-        svg.append('text')
-            .attr('class', 'title')
-            .attr('x', width / 2)  // Center the title horizontally
-            .attr('y', -margin.top / 2)  // Position the title above the chart
-            .style('text-anchor', 'middle')  // Ensure the text is centered horizontally
-            .text('Hospital Stay Distribution')
-            .style('font-weight', 'bold') ;
+    // Add chart title
+    svg.append('text')
+        .attr('class', 'title')
+        .attr('x', width / 2)  // Center the title horizontally
+        .attr('y', -margin.top / 2)  // Position the title above the chart
+        .style('text-anchor', 'middle')  // Ensure the text is centered horizontally
+        .text('Hospital Stay Distribution')
+        .style('font-weight', 'bold');
 
+    // Create a tooltip div (hidden by default)
+    const tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.75)")
+        .style("color", "white")
+        .style("padding", "8px")
+        .style("border-radius", "4px")
+        .style("font-size", "14px");
+
+    // Add hover interaction to bars
+    bars.on("mouseover", function(event, d) {
+        // Show the tooltip and position it near the mouse cursor
+        tooltip.style("visibility", "visible")
+            .text(`Cases: ${d.count}`)
+            .style("top", `${event.pageY + 10}px`)
+            .style("left", `${event.pageX + 10}px`);
+    })
+    .on("mouseout", function() {
+        // Hide the tooltip when mouse leaves the bar
+        tooltip.style("visibility", "hidden");
+    });
 }
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     const data = await loadData();
@@ -386,7 +309,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Render the hospital stay distribution chart
         renderHospitalStayDistribution(stayDistribution);
-        });
+    });
 
 });
 

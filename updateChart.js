@@ -292,11 +292,11 @@ function getBMICategory(bmi) {
 
 function getAlbuminCategory(albuminLevel) {
     if (albuminLevel < 2.5) {
-        return "0.0–2.4";
+        return "0.0-2.4";
     } else if (albuminLevel >= 2.5 && albuminLevel <= 3.4) {
-        return "2.5–3.4";
+        return "2.5-3.4";
     } else if (albuminLevel >= 3.5 && albuminLevel <= 4.9) {
-        return "3.5–4.9";
+        return "3.5-4.9";
     } else if (albuminLevel >= 5.0) {
         return "5.0+";
     } else {
