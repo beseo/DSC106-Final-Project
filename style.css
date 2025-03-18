@@ -1,123 +1,155 @@
+/* General Styles */
 body {
-    max-width: 110ch; 
-    margin-inline: auto; 
-    padding: 1.5em;
+    margin: 0;
+    padding: 0;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     background-color: #f8f9fa;
-    padding: 20px;
+    color: #333;
 }
 
-h1 {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #222;
+/* Hero Section */
+.hero {
+    background-color: #21918c;
+    color: white;
+    padding: 60px 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 23vh; /* Full viewport height */
+    border: 10px solid #1a746f; /* Blue border */
+    box-sizing: border-box; /* Ensure border is included in height */
 }
 
-select {
-    font-size: 1em;
-    padding: 5px 10px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background-color: white;
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
-#chart-container {
+.hero p {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+/* Main Container */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
     padding: 20px;
-    width: 100%;
-    height: auto;
-    border: 1px solid #ddd;
-    background: white;
+    width: 100%; /* Full width */
+    margin: 0 auto;
+}
+
+/* Introduction Section */
+.intro {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+}
+
+.intro h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background-color: #21918c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #1a746f;
+}
+
+/* Chart Section */
+.chart-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.bar {
-    fill: #4a90e2 !important;
-    opacity: 0.9;
-    transition: fill 0.3s, opacity 0.3s;
-}
-.bar:hover {
-    fill: #357ABD !important;
-    opacity: 1;
-}
-
-.container {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px 0;
-    width: 100%;
-}
-
-/* Explanation box styling */
-#explanation-box {
-    flex-shrink: 0;
-    margin: 0;
-    width: 25%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-#explanation-box h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#explanation-box p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Stack elements vertically on small screens */
-        align-items: center; /* Center-align elements */
-    }
-
-    #chart-container {
-        width: 100%; /* Make chart take full width */
-    }
-
-    #explanation-box {
-        width: 100%; /* Make explanation box take full width */
-    }
-}
-
-.overlay-message {
-    margin: 0;
-    position: absolute; /* Position over the chart */
-    top: 0;
-    left: 0;
-    width: 100%; /* Cover the full width of the chart */
-    height: 100%; /* Cover the full height of the chart */
-    background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
-    display: flex; /* Center the text */
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    border-radius: 5px; /* Match the chart border radius */
-    pointer-events: none; /* Allow interactions with the canvas beneath */
-    visibility: visible; /* Show the overlay by default */
-}
-
-.chart-wrapper {
-    position: relative; /* Enables positioning of child elements */
-    width: 100%; /* Ensure it adapts to container width */
-    max-width: 100%;
+.chart-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
 }
 
 #selection {
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-/* #list_categories {
-    list-style-type: none;
-} */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+#chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Explanation Box */
+.explanation-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.explanation-box h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.explanation-box p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #21918c;
+    color: white;
+    margin-top: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .explanation-box {
+        grid-column: 1 / -1;
+    }
+}
