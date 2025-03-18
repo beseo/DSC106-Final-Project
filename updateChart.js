@@ -256,7 +256,7 @@ function getHospitalStayCategory(hospStayLength) {
     } else if (hospStayLength > 25) {
         return "25+ days";
     } else {
-        return "Invalid stay length";
+        return "Invalid";
     }
 }
 

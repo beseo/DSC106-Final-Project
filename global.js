@@ -202,6 +202,14 @@ function renderHospitalStayDistribution(stayDistribution) {
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    // Define the correct order of the categories
+    const categoryOrder = ['0-5 days', '6-10 days', '11-15 days', '16-20 days', '21-25 days', '25+ days'];
+    // Set the data for the bar chart
+    const data = Object.entries(stayDistribution).map(([category, count]) => ({
+        category,
+        count
+    }));
 
     // Set the scales
     const x = d3.scaleBand()
@@ -239,13 +247,13 @@ function renderHospitalStayDistribution(stayDistribution) {
         .attr("height", d => height - y(d.count))
         .attr("fill", "#69b3a2");
 
-    // Add x-axis label
-    svg.append('text')
-        .attr('class', 'axis-label')
-        .attr('x', width / 2)
-        .attr('y', height + margin.bottom / 1.5)
-        .style('text-anchor', 'middle')
-        .text('Hospital Stay Categories');
+        // Add x-axis label
+        svg.append('text')
+            .attr('class', 'axis-label')
+            .attr('x', width / 2)
+            .attr('y', height + margin.bottom / 1.5)
+            .style('text-anchor', 'middle')
+            .text('Hospital Stay Categories');
 
     // Add y-axis label
     svg.append('text')
@@ -256,12 +264,12 @@ function renderHospitalStayDistribution(stayDistribution) {
         .style('text-anchor', 'middle')
         .text('Number of Patients');
 
-    // Add chart title
-    svg.append('text')
-        .attr('class', 'title')
-        .attr('x', width / 2)
-        .attr('y', -margin.top / 2)
-        .text('Hospital Stay Distribution');
+        // Add chart title
+        svg.append('text')
+            .attr('class', 'title')
+            .attr('x', width / 2)
+            .attr('y', -margin.top / 2)
+            .text('Hospital Stay Distribution');
 }
 
 
