@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Stay Predictors</title>
+    <!-- Google Fonts: Inter and JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,8 +17,10 @@
 <body>
     <!-- Hero Section -->
     <header class="hero">
-        <h1>Admitted Today, Discharged When?</h1>
-        <p>Unraveling the biggest factors that affect hospital stay length.</p>
+        <div class="hero-content">
+            <h1>Admitted Today, Discharged When?</h1>
+            <p>Unraveling the biggest factors that affect hospital stay length.</p>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -29,36 +34,50 @@
                 By analyzing preoperative data, we aim to help patients, hospitals, and insurance companies 
                 better plan and manage resources.
             </p>
-                
-            </p>
             
             <div class="center-wrapper">
                 <button class="cta-button" onclick="scrollToChart()">Explore the Data</button>
             </div>    
             
-            <h2>Motivation</h2>
-            <ul>
-                <li><strong>Challenges in Healthcare:</strong> The medical field often faces issues like manpower shortages and inefficient resource allocation.</li>
-                <li><strong>Project Aim:</strong> The project aims to demonstrate the potential innovations that artificial intelligence (AI) and machine learning (ML) can bring to healthcare.</li>
-                <li><strong>Key Goal:</strong> The project showcases the ability to predict patterns within patient data, creating a practical prototype for future applications in healthcare.</li>
-            </ul>            
-            
+            <h2 class="section-title">Motivation</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <h3>Challenges in Healthcare</h3>
+                    <p>The medical field often faces issues like manpower shortages and inefficient resource allocation.</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Project Aim</h3>
+                    <p>Demonstrate the potential innovations that artificial intelligence (AI) and machine learning (ML) can bring to healthcare.</p>
+                </div>
+                <div class="kpi-card">
+                    <h3>Key Goal</h3>
+                    <p>Predict patterns within patient data, creating a practical prototype for future applications in healthcare.</p>
+                </div>
+            </div>
 
-            <section>
-                <h2>Top Factors Impacting Hospital Stay Length</h2>
+            <section class="top-factors mt-4">
+                <h2 class="section-title">Top Factors Impacting Hospital Stay Length</h2>
                 <p>
-                    We utilized a machine learning method, specifically a Random Tree Classifier, 
-                    to identify the top three most important features that impact the length of hospital stay from the dataset.
+                    We utilized a machine learning method, specifically a <strong>Tree Classifier</strong>, 
+                    to identify the <strong>top three most important features</strong> that impact the length of hospital stay from the dataset. You can explore these variables in the interactive visualization below.
                 </p>
-                <p>Here are the key features we discovered:</p>
-                <ul>
-                    <li><strong>Preoperative Albumin (preop_alb):</strong> Indicates nutritional status and correlates with recovery times.</li>
-                    <li><strong>Operation Type - Colorectal (optype_colorectal):</strong> Reflects the impact of colorectal surgeries.</li>
-                    <li><strong>Operation Type - Stomach (optype_stomach):</strong> Accounts for stomach surgeries and their associated recovery requirements.</li>
-                </ul>
-                <p>
-                    You can explore these variables in the interactive visualization below.
-                </p>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <span class="metric-label">Feature 1</span>
+                        <h3>Preoperative Albumin <code class="mono-text">(preop_alb)</code></h3>
+                        <p>Indicates nutritional status and correlates with recovery times.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="metric-label">Feature 2</span>
+                        <h3>Operation Type - Colorectal <code class="mono-text">(optype_colorectal)</code></h3>
+                        <p>Reflects the impact of colorectal surgeries.</p>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="metric-label">Feature 3</span>
+                        <h3>Operation Type - Stomach <code class="mono-text">(optype_stomach)</code></h3>
+                        <p>Accounts for stomach surgeries and recovery requirements.</p>
+                    </div>
+                </div>
 
                 <div class="scrolly">
                     <div class="graphic-container">
@@ -68,79 +87,75 @@
             
                     <div class="scroll-container">
                         <section class="text-section" data-variable="preop_alb_categ">
-                          <h2>Albumin Level</h2>
-                          <p>Albumin is a protein made by the liver that helps maintain fluid balance in the blood. Low albumin levels can indicate poor nutritional status or underlying health issues, and they’re often used to predict a patient’s recovery and overall surgical risk.</p>
-                          <p>Patients with moderately low albumin levels are more likely to stay in the hospital for a much longer amount of time than other albumin groups.</p>
+                            <h2>Albumin Level</h2>
+                            <p>Albumin is a protein made by the liver that helps maintain fluid balance in the blood. Low albumin levels can indicate poor nutritional status or underlying health issues, and they’re often used to predict a patient’s recovery and overall surgical risk.</p>
+                            <p>Patients with moderately low albumin levels are more likely to stay in the hospital for a much longer amount of time than other albumin groups.</p>
                             <p>It is generally accepted that the healthy range for albumin is 3.5–5.0 g/dL.</p>
                         </section>
                         <section class="text-section" data-variable="optype_Colorectal">
-                          <h2>Operation Type (Colorectal)</h2>
-                          <p>What Is a Colorectal Operation?
-                            A colorectal operation is a surgical procedure involving the colon (large intestine) or rectum. It’s commonly performed to treat conditions such as colon cancer, diverticulitis, or inflammatory bowel disease.</p>
-                        <p></p>Not having a colorectal operation results in longer hospital stays.</p>
+                            <h2>Operation Type (Colorectal)</h2>
+                            <p>What Is a Colorectal Operation? A colorectal operation is a surgical procedure involving the colon (large intestine) or rectum. It’s commonly performed to treat conditions such as colon cancer, diverticulitis, or inflammatory bowel disease.</p>
+                            <p>Not having a colorectal operation results in longer hospital stays.</p>
                         </section>
                         <section class="text-section" data-variable="optype_Stomach">
-                          <h2>Operation Type (Stomach)</h2>
-                          <p>What Is a Stomach Operation?
-                            A stomach operation is any surgical procedure involving the stomach. It’s commonly performed to treat conditions such as ulcers, tumors, or other digestive issues. Because these procedures can be more involved, patients often require additional monitoring and care, which may contribute to a slightly longer hospital stay.</p>
-                        <!-- <p>Having a stomach operation results in longer hospital stays.</p> -->
+                            <h2>Operation Type (Stomach)</h2>
+                            <p>What Is a Stomach Operation? A stomach operation is any surgical procedure involving the stomach. It’s commonly performed to treat conditions such as ulcers, tumors, or other digestive issues. Because these procedures can be more involved, patients often require additional monitoring and care, which may contribute to a slightly longer hospital stay.</p>
                         </section>
                     </div>
                 </div>
             </section>
-
-            <h2>More Exploration</h2>
-
         </section>
 
-        <!-- Chart Section -->
-        <section class="chart-section">
-            <h2>Explore Hospital Stay Predictors</h2>
-            <p class="graph-intro">
-                These are the preoperative and demographic features that we are going to look at. 
-                <strong>Select a variable from the dropdown</strong> below to see how it affects the average length of hospital stay.
-                <strong>Hover over each bar</strong> to view detailed information about each category within the selected variable.
-            </p>
-            <select id="selection" name="selection">
-                <option value="start_option" disabled selected>Select a variable</option>
-                <option value="asa">ASA</option>
-                <option value="age_group">Age</option>
-                <option value="sex">Gender</option>
-                <option value="bmi_category">BMI</option>
-                <option value="department">Department</option>
-                <option value="approach">Surgical Approach</option>
-                <option value="position">Surgical Position</option>
-                <option value="ane_type">Anesthesia Type</option>
-                <option value="optype">Operation Type</option>
-                <option value="preop_ecg">Preoperative ECG</option>
-                <option value="preop_pft">Preoperative Pulmonary Function</option>
-                <option value="preop_htn">Preoperative Hypertension</option>
-                <option value="preop_dm">Preoperative Diabetes</option>
-                <option value="death_inhosp">In-Hospital Death</option>
-                <option value="emop">Emergency Operation</option>
-                <option value="preop_alb_categ">Preoperative Albumin</option>
-                <option value="preop_hb_categ">Preoperative Hemoglobin</option>
-            </select>
-            <div class="chart-wrapper">
-                <canvas id="chart-container" width="400" height="200"></canvas>
-                <div class="overlay-message" id="overlay-message">Please select a variable to explore</div>
-            </div>
-        </section>
+        <div class="explorer-wrapper">
+            <!-- Chart Section -->
+            <section class="chart-section">
+                <h2>Explore Other Variables in the Data</h2>
+                <p class="graph-intro">
+                    These are the preoperative and demographic features that we are going to look at. 
+                    <strong>Select a variable from the dropdown</strong> below to see how it affects the average length of hospital stay.
+                    <strong>Hover over each bar</strong> to view detailed information about each category within the selected variable.
+                </p>
+                <select id="selection" name="selection" class="modern-select">
+                    <option value="start_option" disabled selected>Select a variable</option>
+                    <option value="asa">ASA</option>
+                    <option value="age_group">Age</option>
+                    <option value="sex">Gender</option>
+                    <option value="bmi_category">BMI</option>
+                    <option value="department">Department</option>
+                    <option value="approach">Surgical Approach</option>
+                    <option value="position">Surgical Position</option>
+                    <option value="ane_type">Anesthesia Type</option>
+                    <option value="optype">Operation Type</option>
+                    <option value="preop_ecg">Preoperative ECG</option>
+                    <option value="preop_pft">Preoperative Pulmonary Function</option>
+                    <option value="preop_htn">Preoperative Hypertension</option>
+                    <option value="preop_dm">Preoperative Diabetes</option>
+                    <option value="death_inhosp">In-Hospital Death</option>
+                    <option value="emop">Emergency Operation</option>
+                    <option value="preop_alb_categ">Preoperative Albumin</option>
+                    <option value="preop_hb_categ">Preoperative Hemoglobin</option>
+                </select>
+                <div class="chart-wrapper">
+                    <canvas id="chart-container"></canvas>
+                    <div class="overlay-message" id="overlay-message">Please select a variable to explore</div>
+                </div>
+            </section>
 
-        <!-- Explanation Box -->
-        <aside class="explanation-box" id="explanation-box">
-            <h3>Variable Explanation</h3>
-            <p id="variable-explanation">Select a variable to see its explanation here.</p>
-        </aside>
+            <!-- Explanation Box -->
+            <aside class="explanation-box" id="explanation-box">
+                <h3>Variable Explanation</h3>
+                <p id="variable-explanation">Select a variable to see its explanation here.</p>
+            </aside>
+        </div>
 
-        <section class = "model">
-            <h2>Hospital Stay Filter & Analysis Tool</h2>
+        <section class="model">
+            <h2 class="section-title">Hospital Stay Filter & Analysis Tool</h2>
             <p>Filter patients and visualize hospital stay length using the predictor features we found.</p>
             <div class="form-container">
                 <form id="filter-form">
                     <div class="form-group">
                         <label for="albumin-category">Albumin Range (g/dL):</label>
-                        <select id="albumin-category" name="albumin-category">
+                        <select id="albumin-category" name="albumin-category" class="modern-select">
                             <option value="start" disabled selected>Select</option>
                             <option value="0.0-2.4">0.0-2.4</option>
                             <option value="2.5-3.4">2.5-3.4</option>
@@ -148,56 +163,58 @@
                             <option value="5.0+">5.0+</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="colorectal-checkbox" name="operation" value="colorectal">
+                            <span class="custom-checkbox"></span>
                             Operation Type (Colorectal)
                         </label>
                     </div>
-                    <div class="form-group">
-                        <label>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
                             <input type="checkbox" id="stomach-checkbox" name="operation" value="stomach">
+                            <span class="custom-checkbox"></span>
                             Operation Type (Stomach)
                         </label>
                     </div>
-                    <button id="filter-button" type="button" onclick="filterData()">Show Data</button>
+                    <button id="filter-button" class="cta-button" type="button" onclick="filterData()">Show Data</button>
                 </form>
             </div>
 
-            <div id="result" style="margin-top: 20px;"></div> <!-- The result div -->
-            
-            <div class="distribution">
-                <div id="hospitalStayChart"></div>   
-            </div>
-
-            <section class="takeaway">
-                <h2>Takeaways</h2>
-                <ul>
-                    <li><strong>Preliminary Prototype:</strong> The model serves as an initial framework for future use in the medical field.</li>
-                    <li><strong>Customizability:</strong> Medical professionals can adapt the model by incorporating their own variables and datasets.</li>
-                    <li><strong>Machine Learning Potential:</strong> Hospitals could utilize machine learning to:
-                        <ul>
-                            <li>Accurately predict patient hospital stay durations.</li>
-                            <li>Potentially predict illnesses in the future.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Resource Optimization:</strong> By leveraging these predictions, hospitals can:
-                        <ul>
-                            <li>Efficiently allocate resources and manpower.</li>
-                            <li>Foster innovation in medical care.</li>
-                        </ul>
-                    </li>
-                </ul>
+            <div class="result-box">
+                <p id="result">No filters applied. Adjust the parameters above to explore hospital stay lengths.</p>
                 
-            </section>
-            
+                <div class="distribution">
+                    <div id="hospitalStayChart"></div>   
+                </div>
+            </div>
         </section>
 
+        <section class="takeaway">
+            <h2 class="section-title">Takeaways</h2>
+            <ul>
+                <li><strong>Preliminary Prototype:</strong> The model serves as an initial framework for future use in the medical field.</li>
+                <li><strong>Customizability:</strong> Medical professionals can adapt the model by incorporating their own variables and datasets.</li>
+                <li><strong>Machine Learning Potential:</strong> Hospitals could utilize machine learning to:
+                    <ul>
+                        <li>Accurately predict patient hospital stay durations.</li>
+                        <li>Potentially predict illnesses in the future.</li>
+                    </ul>
+                </li>
+                <li><strong>Resource Optimization:</strong> By leveraging these predictions, hospitals can:
+                    <ul>
+                        <li>Efficiently allocate resources and manpower.</li>
+                        <li>Foster innovation in medical care.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
         <p>Created by Nomin Batjargal, Max Zou, Terran Chow, and Beomsuk Seo</p>
+        <a href="https://github.com/beseo/DSC106-Final-Project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
     </footer>
 
     <script>

@@ -143,6 +143,19 @@ function renderHospitalStayDistribution(stayDistribution) {
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
+    svg.append("g")
+        .attr("class", "grid")
+        .call(d3.axisLeft(y)
+            .tickSize(-width) // Extends the tick lines across the entire chart width
+            .tickFormat("")   // Removes the numbers from these specific ticks
+        )
+        .selectAll("line")
+        .style("stroke", "#d1d3d6") // A light gray color for subtlety
+        .style("stroke-width", "1px");
+
+    // Hide the solid vertical axis line for the grid group so it doesn't overlap your real Y-axis
+    svg.selectAll(".grid path").style("display", "none");
+
     // Create the bars
     const bars = svg.selectAll(".bar")
         .data(data)
@@ -153,7 +166,7 @@ function renderHospitalStayDistribution(stayDistribution) {
         .attr("y", d => y(d.count))
         .attr("width", x.bandwidth())
         .attr("height", d => height - y(d.count))
-        .attr("fill", "#69b3a2");
+        .attr("fill", "rgba(29, 112, 116, 0.8)");
 
     // Add x-axis label
     svg.append('text')
