@@ -2,7 +2,7 @@
 
 Unraveling the biggest factors that affect hospital stay length.
 
-**View the live site [here](https://beseo.github.io/DSC106-Final-Project/)** 
+**View [Website](https://beseo.github.io/DSC106-Final-Project/)** 
 
 ## About the Project
 This interactive data visualization dashboard explores the key preoperative and demographic factors influencing hospital stay lengths. Built as a practical prototype for healthcare resource management, the tool analyzes clinical data to help patients, medical professionals, and insurance companies better predict recovery timelines and allocate resources.
