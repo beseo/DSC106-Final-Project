@@ -25,7 +25,7 @@ The analysis and dashboard utilize the open-source **Korean hospital dataset** p
 ## Technologies Used
 | Category | Technology |
 | :--- | :--- |
-| **Frontend Core** | Vanilla HTML5, CSS3, JavaScript (ES6+) |
+| **Frontend Core** | Vanilla HTML5, CSS, JavaScript|
 | **Data Visualization** | [Chart.js](https://www.chartjs.org/) (Interactive Bar Charts), [D3.js v7](https://d3js.org/) (Custom Distribution Charts) |
 | **Data Processing** | [PapaParse](https://www.papaparse.com/) (In-browser CSV parsing and transformation) |
 | **Design** | Responsive CSS Grid/Flexbox, Scrollytelling Architecture |
